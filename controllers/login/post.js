@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
-    console.log("here");
+    console.log(req.body.name);
     return res.render('login',{
-    title:req.body.name
+    title:req.body.isim
     })
   }

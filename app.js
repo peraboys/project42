@@ -1,6 +1,8 @@
 const http = require('http');
 const express = require('express');
 const app=express();
+const bodyParser = require('body-parser');
+
 
 
 
@@ -16,6 +18,8 @@ app.set("view engine", "pug");
 
 app.use('/', indexRouteController);
 app.use('/login', loginRouteController);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
