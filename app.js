@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express');
 const app=express();
 const bodyParser = require('body-parser');
+const path=require('path');
 
 
 
@@ -16,12 +17,15 @@ const adminRouteController=require('./routes/adminRoute.js');
 const server = http.createServer(app);
 
 app.set("view engine", "pug");
-
 app.use('/', indexRouteController);
 app.use('/login', loginRouteController);
 app.use('/admin', adminRouteController);
+app.use((req,res)=>{
+  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
+}
+)
 
-app.use(bodyParser.json);
+
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
