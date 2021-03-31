@@ -11,3 +11,5 @@ atalay1 has logged in!
 atalay1 has logged in!
 atalay1 is registered!
 gitignore test 
+git ignore test 2
+
