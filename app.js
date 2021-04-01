@@ -17,7 +17,8 @@ const adminRouteController=require('./routes/adminRoute.js');
 const server = http.createServer(app);
 
 app.set("view engine", "pug");
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouteController);
 app.use('/login', loginRouteController);
@@ -26,6 +27,7 @@ app.use((req,res,next)=>{
  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
   
 })
+
 
 
 
