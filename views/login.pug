@@ -1,16 +1,12 @@
-html
-    head
-      title= title
-     
-    body
-         h1= message
-         | Merhaba login
-    form( role="form", action="/login", method="POST")
+extends layouts/main-layout.pug     
+block  content
+  h1= message
+   | Merhaba login
+  form( role="form", action="/login", method="POST")
     p
-       | name: 
-       input(type="text", name="name", placeholder="isim")
-       |          password: 
-       input(type="text", name="password",placeholder="şifre")
-       |           
-       input(type='submit', value='Submit')
-   
+    | name: 
+    input(type="text", name="name", placeholder="isim")
+    |          password: 
+    input(type="text", name="password",placeholder="şifre")
+    |           
+    input(type='submit', value='Submit')

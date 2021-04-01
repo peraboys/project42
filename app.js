@@ -18,7 +18,7 @@ const server = http.createServer(app);
 
 app.set("view engine", "pug");
 
-app.use("/public", express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouteController);
 app.use('/login', loginRouteController);
 app.use('/admin', adminRouteController);
