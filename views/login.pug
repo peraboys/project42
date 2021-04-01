@@ -6,10 +6,11 @@ html
          h1= message
          | Merhaba login
     form( role="form", action="/login", method="POST")
-     p
+    p
        | name: 
        input(type="text", name="name", placeholder="isim")
        |          password: 
        input(type="text", name="password",placeholder="şifre")
        |           
        input(type='submit', value='Submit')
+   
