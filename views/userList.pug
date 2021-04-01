@@ -2,6 +2,8 @@ html
     head
         h1 UserList
     body 
-        each user in users 
-            li #{user.name}
-         
+        if users.length>0
+            each user in users 
+                li #{user.name}
+        else 
+            h1 No users available 
