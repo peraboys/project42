@@ -13,4 +13,8 @@ router.get(
   router.get(
     '/userlist',
      usersController.getUsers);
+  router.get(
+    '/edituser/:userid',
+    usersController.editUser
+  );
   module.exports = router;

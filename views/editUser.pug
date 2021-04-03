@@ -1,0 +1,19 @@
+html
+    head
+        h1 editUser
+    body
+        form
+            input(type="hidden", name="id", value=`${user.id}`)
+            input(type="text", name="name", value=`${user.name}`)
+            input(type="text", name="password", value=`${user.password}`)
+            | gender: 
+            input(type="radio", name="gender",id="male",value="male")
+            label(for="male") Male
+            input(type="radio", name="gender",id="female",value="female")
+            label(for="female") Female
+            br
+            |isAdmin: 
+            input(type="checkbox",name="isAdmin",value="isAdmin")
+            |           
+            input(type='submit', value='Update')
+

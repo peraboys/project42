@@ -3,7 +3,22 @@ html
         h1 UserList
     body 
         if users.length>0
-            each user in users 
-                li #{user.name}
+            table
+
+                tr
+                    td name 
+                    td password 
+                    td gender
+                    td isAdmin
+                each user in users 
+                    tr 
+                        td #{user.name}
+                        td #{user.password}
+                        td #{user.gender}
+                        td #{user.isAdmin}
+                        td 
+                            a(href=`/admin/edituser/${user.id}`) edit
+                    
+
         else 
             h1 No users available 
