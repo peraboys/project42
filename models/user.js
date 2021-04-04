@@ -1,4 +1,4 @@
-const users=[];
+var users=[];
 module.exports=class User{
     constructor(name,password,gender,isAdmin){
         this.id=Math.floor(Math.random()*99999)+1;
@@ -18,5 +18,11 @@ module.exports=class User{
        console.log(user);
        return user;
        
+    }
+
+    static deleteById(id){
+    const index=users.findIndex(i=>i.id===id)
+     users.splice(index,1);
+     
     }
 }

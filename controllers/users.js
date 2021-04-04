@@ -1,4 +1,5 @@
 
+const { deleteUser } = require('../models/User');
 const User=require('../models/User');
 module.exports.getUsers=(req,res)=>{
  return res.render('userList',{users:User.getAll()});
@@ -27,4 +28,10 @@ module.exports.postEditUser=(req,res)=>{
     user.gender=req.body.gender;
     user.isAdmin=req.body.isAdmin;
     return res.redirect('userlist');
+}
+module.exports.deleteUser=(req,res)=>{
+    
+    User.deleteById(req.params.userid);
+    return res.redirect('/admin/userlist');
+    
 }

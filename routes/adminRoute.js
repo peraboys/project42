@@ -21,4 +21,8 @@ router.get(
     '/edituser',
     usersController.postEditUser
   )
+  router.get(
+  '/deleteuser/:userid',
+  usersController.deleteUser
+  );
   module.exports = router;
