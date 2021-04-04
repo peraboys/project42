@@ -2,7 +2,9 @@
 const { deleteUser } = require('../models/User');
 const User=require('../models/User');
 module.exports.getUsers=(req,res)=>{
- return res.render('userList',{users:User.getAll()});
+ return res.render('userList',{
+    action:req.query.action,
+    users:User.getAll()});
 }
 module.exports.addUser=(req,res)=>{
 var isAdminVal;
@@ -27,11 +29,11 @@ module.exports.postEditUser=(req,res)=>{
     user.password=req.body.password;
     user.gender=req.body.gender;
     user.isAdmin=req.body.isAdmin;
-    return res.redirect('userlist');
+    return res.redirect('userlist?action=edit');
 }
 module.exports.deleteUser=(req,res)=>{
     
     User.deleteById(req.params.userid);
-    return res.redirect('/admin/userlist');
+    return res.redirect('/admin/userlist?action=delete');
     
 }
