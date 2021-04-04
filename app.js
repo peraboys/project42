@@ -3,6 +3,7 @@ const express = require('express');
 const app=express();
 const bodyParser = require('body-parser');
 const path=require('path');
+const mongoConnect=require('./utility/database');
 
 
 
@@ -27,11 +28,14 @@ app.use((req,res,next)=>{
  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
   
 })
-
-
-
-
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+mongoConnect((client)=>{
+  app.listen(3000);
+  console.log(client);
 });
+
+
+
+
+/*server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});*/
