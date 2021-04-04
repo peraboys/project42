@@ -26,4 +26,5 @@ module.exports.postEditUser=(req,res)=>{
     user.password=req.body.password;
     user.gender=req.body.gender;
     user.isAdmin=req.body.isAdmin;
+    return res.redirect('userlist');
 }
