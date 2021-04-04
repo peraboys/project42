@@ -1,7 +1,11 @@
 html
     head
         h1 UserList
-    body 
+    body
+        if action=='delete'
+            h1 User deleted
+        if action =='edit'
+            h1 user updated 
         if users.length>0
             table
 
