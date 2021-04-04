@@ -15,8 +15,15 @@ var user=new User(req.body.name,req.body.password,req.body.gender,isAdminVal);
 user.saveUser();
 return res.redirect('admin');
 }
-module.exports.editUser=(req,res)=>{
+module.exports.getEditUser=(req,res)=>{
 var user=User.findById(req.params.userid);
 console.log(user.name);
 return res.render('editUser',{user:user});
+}
+module.exports.postEditUser=(req,res)=>{
+    var user=User.findById(req.body.id);
+    user.name=req.body.name;
+    user.password=req.body.password;
+    user.gender=req.body.gender;
+    user.isAdmin=req.body.isAdmin;
 }

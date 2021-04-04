@@ -15,6 +15,10 @@ router.get(
      usersController.getUsers);
   router.get(
     '/edituser/:userid',
-    usersController.editUser
+    usersController.getEditUser
   );
+  router.post(
+    '/edituser',
+    usersController.postEditUser
+  )
   module.exports = router;
