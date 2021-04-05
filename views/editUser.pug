@@ -3,7 +3,7 @@ html
         h1 editUser
     body
         form(role="form", action="/admin/edituser", method="POST")
-            input(type="hidden", name="id", value=`${user.id}`)
+            input(type="hidden", name="id", value=`${user._id}`)
             input(type="text", name="name", value=`${user.name}`)
             input(type="text", name="password", value=`${user.password}`)
             | gender: 
@@ -16,4 +16,5 @@ html
             input(type="checkbox",name="isAdmin",value="isAdmin",checked=(user.isAdmin=='yes'? true :false))
             |           
             input(type='submit', value='Update')
+
 

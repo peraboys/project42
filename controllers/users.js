@@ -1,10 +1,16 @@
 
 const  deleteUser = require('../models/User');
 const User=require('../models/User');
-module.exports.getUsers=(req,res)=>{
+module.exports.getUsers=(req,res,next)=>{
+   User.findAll()
+   .then(users=>{
+
+   
+
  return res.render('userList',{
     action:req.query.action,
-    users:User.getAll()});
+    users:users});
+})
 }
 module.exports.addUser=(req,res)=>{
 var isAdminVal;
@@ -25,21 +31,35 @@ user.saveUser()
 
 }
 module.exports.getEditUser=(req,res)=>{
-var user=User.findById(req.params.userid);
-console.log(user.name);
-return res.render('editUser',{user:user});
+    User.findById(req.params.userid)
+.then(users=>{
+    
+    console.log(users[0]);
+    return res.render('editUser',{user:users[0]});
+})
+
+
+
 }
 module.exports.postEditUser=(req,res)=>{
-    var user=User.findById(req.body.id);
+   User.findById(req.body.id)
+    .then(users=>{
+        
+        var user=users[0];
+        
+       // console.log(user);
     user.name=req.body.name;
     user.password=req.body.password;
     user.gender=req.body.gender;
     user.isAdmin=req.body.isAdmin;
-    return res.redirect('userlist?action=edit');
+    user.saveUser();
+    return res.redirect('/admin/userlist?action=edit');
+})
 }
 module.exports.deleteUser=(req,res)=>{
     
     User.deleteById(req.params.userid);
     return res.redirect('/admin/userlist?action=delete');
     
+
 }
