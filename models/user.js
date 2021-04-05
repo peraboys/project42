@@ -1,3 +1,4 @@
+const getDb=require('../utility/database').getDb;
 var users=[];
 module.exports=class User{
     constructor(name,password,gender,isAdmin){
@@ -8,7 +9,15 @@ module.exports=class User{
         this.isAdmin=isAdmin;
     }
     saveUser(){
-        users.push(this);
+       const db=getDb();
+       db.collection('users')
+       .insertOne(this)
+       .then(result => {
+           console.log(result);
+       })
+       .catch(err=>{
+           console.log(err);
+       })
     }
     static getAll(){
         return users;
@@ -24,5 +33,17 @@ module.exports=class User{
     const index=users.findIndex(i=>i.id===id)
      users.splice(index,1);
      
+    }
+    static findAll(){
+        const db=getDb();
+         db.collection('users')
+        .find({})
+        .toArray()
+        .then(users=>{
+            return users;
+        } )
+        .catch(err=>{
+            console.log(err);
+        })
     }
 }

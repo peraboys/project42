@@ -19,4 +19,5 @@ const getdb=()=>{
     throw 'no database';
 }
 module.exports=mongoConnect;
+module.exports.getDb=getdb;
 

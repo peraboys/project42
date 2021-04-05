@@ -29,9 +29,8 @@ app.use((req,res,next)=>{
  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
   
 })
-mongoConnect((client)=>{
+mongoConnect(()=>{
   app.listen(3000);
-  console.log(client);
 });
 
 

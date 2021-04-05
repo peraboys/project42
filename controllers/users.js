@@ -1,5 +1,5 @@
 
-const { deleteUser } = require('../models/User');
+const  deleteUser = require('../models/User');
 const User=require('../models/User');
 module.exports.getUsers=(req,res)=>{
  return res.render('userList',{
@@ -15,8 +15,14 @@ else{
  isAdminVal="no";
 }
 var user=new User(req.body.name,req.body.password,req.body.gender,isAdminVal);
-user.saveUser();
-return res.redirect('admin');
+user.saveUser()
+.then(result=>{
+    res.redirect('admin');
+})
+.catch(err=>{
+    console.log(err);
+})
+
 }
 module.exports.getEditUser=(req,res)=>{
 var user=User.findById(req.params.userid);
