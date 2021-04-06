@@ -3,8 +3,8 @@ const mongodb=require('mongodb');
 var users=[];
 module.exports=class User{
     constructor(name,password,gender,isAdmin,id){
-        this.id=Math.floor(Math.random()*99999)+1;
-        this._id=new mongodb.ObjectID(id);
+       // this.id=Math.floor(Math.random()*99999)+1;
+        this._id= id ? new mongodb.ObjectID(id) : null;
         this.name=name;
         this.password=password;
         this.gender=gender;
@@ -14,17 +14,17 @@ module.exports=class User{
        let db=getDb();
 
        if(this._id){
-        db.collection('users')
-        .updateOne({ _id:this._id}, { $set: this});
+      db =  db.collection('users')
+        .updateOne({ _id : this._id}, { $set: this });
 
        }else{
 
-db.collection('users')
-       .insertOne(this)
+db = db.collection('users')
+       .insertOne(this);
        }
 
       return db
-       .then(result => {
+      .then(result => {
            console.log(result);
        })
        .catch(err=>{
@@ -42,8 +42,15 @@ db.collection('users')
     }
 
     static deleteById(id){
-    const index=users.findIndex(i=>i.id===id)
-     users.splice(index,1);
+    const db=getDb();
+    return db.collection('users').deleteOne({_id:new mongodb.ObjectID(id)})
+    .then(()=>{
+        console.log('user deleted')
+    })
+        .catch(err=>{
+            console.log(err);
+        })
+    
      
     }
     static findAll(){

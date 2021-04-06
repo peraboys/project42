@@ -42,20 +42,28 @@ module.exports.getEditUser=(req,res)=>{
 
 }
 module.exports.postEditUser=(req,res)=>{
-   User.findById(req.body.id)
-    .then(users=>{
-        
-        var user=users[0];
+  
         
        // console.log(user);
-    user.name=req.body.name;
-    user.password=req.body.password;
-    user.gender=req.body.gender;
-    user.isAdmin=req.body.isAdmin;
-    user.saveUser();
-    return res.redirect('/admin/userlist?action=edit');
-})
+    const name=req.body.name;
+    const password=req.body.password;
+     const gender=req.body.gender;
+    const isAdmin=req.body.isAdmin;
+    const id=req.body.id;
+
+    const user= new User(name, password,gender,isAdmin,id);
+
+    console.log(user);
+    user.saveUser()
+    .then(result=>{
+         res.redirect('/admin/userlist?action=edit');
+    })
+    .catch(err=>{
+        console.log(err);
+    })
 }
+   
+
 module.exports.deleteUser=(req,res)=>{
     
     User.deleteById(req.params.userid);
