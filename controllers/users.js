@@ -2,7 +2,7 @@
 const  deleteUser = require('../models/User');
 const User=require('../models/User');
 module.exports.getUsers=(req,res,next)=>{
-   User.findAll()
+   User.find()
    .then(users=>{
 
    
@@ -20,9 +20,18 @@ if(req.body.isAdmin){
 else{
  isAdminVal="no";
 }
-var user=new User(req.body.name,req.body.password,req.body.gender,isAdminVal);
-user.saveUser()
-.then(result=>{
+var user=new User(
+    {
+        name:req.body.name,
+        password:req.body.password,
+        gender:req.body.gender,
+        isAdmin:isAdminVal
+    }
+);
+
+user.save()
+.then(()=>{
+    console.log("hello");
     res.redirect('admin');
 })
 .catch(err=>{
@@ -31,11 +40,12 @@ user.saveUser()
 
 }
 module.exports.getEditUser=(req,res)=>{
-    User.findById(req.params.userid)
-.then(users=>{
+    User.findOne({_id:req.params.userid})
+.then(user=>{
     
-    console.log(users[0]);
-    return res.render('editUser',{user:users[0]});
+    console.log(user);
+    console.log("sinan");
+    return res.render('editUser',{user:user});
 })
 
 
@@ -48,14 +58,22 @@ module.exports.postEditUser=(req,res)=>{
     const name=req.body.name;
     const password=req.body.password;
      const gender=req.body.gender;
-    const isAdmin=req.body.isAdmin;
+     var isAdminVal;
+     if(req.body.isAdmin){
+        isAdminVal="yes";
+       }
+       else{
+        isAdminVal="no";
+       }
     const id=req.body.id;
 
-    const user= new User(name, password,gender,isAdmin,id);
-
-    console.log(user);
-    user.saveUser()
-    .then(result=>{
+    User.update({_id:id},{$set:{
+        name:name,
+        password:password,
+        gender:gender,
+        isAdmin:isAdminVal
+    }})
+    .then(()=>{
          res.redirect('/admin/userlist?action=edit');
     })
     .catch(err=>{
@@ -65,9 +83,14 @@ module.exports.postEditUser=(req,res)=>{
    
 
 module.exports.deleteUser=(req,res)=>{
+    User.findByIdAndDelete(req.params.userid)
+    .then(()=>{
+     res.redirect('/admin/userlist?action=delete');
+    })
+    .catch(err=>{
+    console.log(err);
+    })
     
-    User.deleteById(req.params.userid);
-    return res.redirect('/admin/userlist?action=delete');
     
 
 }

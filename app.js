@@ -3,7 +3,7 @@ const express = require('express');
 const app=express();
 const bodyParser = require('body-parser');
 const path=require('path');
-const mongoConnect=require('./utility/database');
+//const mongoConnect=require('./utility/database');
 const mongoose=require('mongoose');
 
 
@@ -29,9 +29,14 @@ app.use((req,res,next)=>{
  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
   
 })
-mongoConnect(()=>{
-  app.listen(3000);
-});
+mongoose.connect('mongodb+srv://sinan:sinanpera@cluster0.hjeq5.mongodb.net/test',{ useFindAndModify: false })
+.then(()=>{
+console.log("connected to mongodb");
+app.listen(3000);
+})
+.catch(err=>{
+  console.log(err);
+})
 
 
 

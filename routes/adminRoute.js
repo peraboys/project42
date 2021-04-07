@@ -18,7 +18,7 @@ router.get(
     usersController.getEditUser
   );
   router.post(
-    '/edituser',
+    '/edituser/',
     usersController.postEditUser
   )
   router.get(
