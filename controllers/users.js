@@ -44,7 +44,7 @@ module.exports.getEditUser=(req,res)=>{
 .then(user=>{
     
     console.log(user);
-    console.log("sinan");
+    
     return res.render('editUser',{user:user});
 })
 

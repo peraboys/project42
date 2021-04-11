@@ -1,0 +1,19 @@
+extends layouts/main-layout.pug
+     
+block  content
+    h1 register
+    form( role="form", action="/register", method="POST")
+     p
+       | name: 
+       input(type="text", name="name", placeholder="isim")
+       | password: 
+       input(type="text", name="password",placeholder="şifre")
+       | gender: 
+       input(type="radio", name="gender",id="male",value="male")
+       label(for="male") Male
+       input(type="radio", name="gender",id="female",value="female")
+       label(for="female") Female
+        
+       input(type="hidden",name="isAdmin",value="notAdmin")
+       |           
+       input(type='submit', value='Register')    
