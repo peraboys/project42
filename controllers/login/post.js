@@ -6,7 +6,10 @@ module.exports = (req, res) => {
       
       if(user){
         if(user.password===req.body.password){
+         // res.cookie('isAuth',true );
+         req.session.isAuth=true;
           return res.redirect('home');
+          
         }
         return res.redirect('login');
       }

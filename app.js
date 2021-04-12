@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');
 const path=require('path');
 //const mongoConnect=require('./utility/database');
 const mongoose=require('mongoose');
-
+const cookieParser=require('cookie-parser');
+const session=require('express-session');
+const mongoDbStore=require('connect-mongodb-session')(session);
+const connectionString='mongodb+srv://sinan:sinanpera@cluster0.hjeq5.mongodb.net/test';
 
 
 
@@ -24,16 +27,32 @@ app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')));
+var store=new mongoDbStore({
+uri:connectionString,
+collection:'mySessions'
+});
+app.use(cookieParser());
+app.use(session({
+ secret:'pera',
+ resave: false,
+ saveUninitialized: false,
+ cookie:{
+   maxAge:2000
+ },
+ store:store
+
+}));
 app.use('/', indexRouteController);
 app.use('/login', loginRouteController);
 app.use('/admin', adminRouteController);
 app.use('/register', registerRouteController);
 app.use('/home', homeRouteController);
+
 app.use((req,res,next)=>{
  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
   
 })
-mongoose.connect('mongodb+srv://sinan:sinanpera@cluster0.hjeq5.mongodb.net/test',{ useFindAndModify: false })
+mongoose.connect(connectionString,{ useFindAndModify: false })
 .then(()=>{
 console.log("connected to mongodb");
 app.listen(3000);
