@@ -8,7 +8,8 @@ password:{
     required:true
 },
 gender:String,
-isAdmin:String
-})
+isAdmin:{ type:Boolean,
+    default:false
+}})
 const User=mongoose.model('User',UserSchema);
 module.exports=User;

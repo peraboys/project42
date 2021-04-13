@@ -1,18 +1,39 @@
 const User=require('../../models/User');
+const bcrypt=require('bcrypt');
 module.exports = (req, res) => {
-    var user=new User(
+    User.findOne({name: req.body.name})
+    .then(usr=>
         {
-            name:req.body.name,
-            password:req.body.password,
-            gender:req.body.gender,
-            isAdmin:"no"
-            
-        }
-    );
+            if(usr){
+                return res.redirect('/register');
+            }
+            return bcrypt.hash(req.body.password,10);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+        .then(hashedPassword=>{
+            const user=new User(
+                {
+                    name:req.body.name,
+                    password:hashedPassword,
+                    gender:req.body.gender,
+                    
+                }
+            );
+            return user.save()
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+        .then(()=>
+        {
+           return  res.redirect('/login');
+        })
+
+   
     
-    user.save()
-    return res.render('home',{
-      message:"you are registered " + req.body.name
-      })
+    
+    
     
     }

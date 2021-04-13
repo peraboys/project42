@@ -13,19 +13,13 @@ module.exports.getUsers=(req,res,next)=>{
 })
 }
 module.exports.addUser=(req,res)=>{
-var isAdminVal;
-if(req.body.isAdmin){
- isAdminVal="yes";
-}
-else{
- isAdminVal="no";
-}
+
 var user=new User(
     {
         name:req.body.name,
         password:req.body.password,
         gender:req.body.gender,
-        isAdmin:isAdminVal
+        isAdmin:req.body.isAdmin=='isAdmin'
     }
 );
 

@@ -1,22 +1,50 @@
 const User=require('../../models/User');
+const bcrypt=require('bcrypt');
 module.exports = (req, res) => {
 
   User.findOne({name:req.body.name})
   .then(user=>{
       
       if(user){
-        if(user.password===req.body.password){
+       bcrypt.compare(req.body.password,user.password)
+       .then(isSuccess=>{
+         if(isSuccess){
+          req.session.user=user;
+          req.session.isAuth=true;
+          return req.session.save(function(err){
+             if(err)
+             {
+              console.log(err);
+             }
+             
+              res.redirect('home');
+           });
+
+           }
+           res.redirect('login');
+         })
+         
+     
+       .catch(err=>{
+         console.log(err);
+       })
          // res.cookie('isAuth',true );
-         req.session.isAuth=true;
-          return res.redirect('home');
+         
+         
           
-        }
+        
+        
+      }
+      else{
         return res.redirect('login');
       }
-      return res.redirect('login');
+      
+       
+
+      
       
   })
-  
+
 
     
     
