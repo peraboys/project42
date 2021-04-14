@@ -1,11 +1,13 @@
 const mongoose=require('mongoose');
+const {isStrongPassword}=require('validator');
 const UserSchema=mongoose.Schema({
 name:{type:String,
-    required:true
+    required:[true,'the name field cannot be empty']
 },
 password:{
     type:String,
-    required:true
+   // required:[true,'the password field cannot be empty'],
+    validate:[isStrongPassword,'not a strong password']
 },
 gender:String,
 isAdmin:{ type:Boolean,
