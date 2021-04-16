@@ -4,7 +4,7 @@ const {isStrongPassword, default: validator}=require('validator');
 const { validate } = require('../../models/User');
 
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey('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');
+//sgMail.setApiKey("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");
 
 module.exports = (req, res) => {
     User.findOne({name: req.body.name})
@@ -26,6 +26,7 @@ module.exports = (req, res) => {
                         name:req.body.name,
                         password:hashedPassword,
                         gender:req.body.gender,
+                        email:req.body.email
                         
                     }
                 );
@@ -33,12 +34,14 @@ module.exports = (req, res) => {
             })
                 .then(()=>
             {
+                console.log(req.body.email);
                  res.redirect('/login');
                 const msg = {
-                    to: 'sinanergezer@gmail.com', // Change to your recipient
-                    from: 'atalaykorkut@hotmail.com', // Change to your verified sender
+                    to: req.body.email, // Change to your recipient
+                    from: 'sinanergezer@gmail.com', // Change to your verified sender
                     subject: 'Verify your email',
-                    text: 'Verify your email'
+                    text: 'Please Verify your email'
+                    
                     
                   }
                   sgMail
