@@ -38,7 +38,7 @@ module.exports = (req, res) => {
                  res.redirect('/login');
                 const msg = {
                     to: req.body.email, // Change to your recipient
-                    from: 'sinanergezer@gmail.com', // Change to your verified sender
+                    from: 'atalaykorkut@hotmail.com', // Change to your verified sender
                     subject: 'Verify your email',
                     text: 'Please Verify your email'
                     

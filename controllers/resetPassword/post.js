@@ -1,11 +1,13 @@
 
 const sgMail = require('@sendgrid/mail')
+require('dotenv').config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+//sgMail.setApiKey('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');
 module.exports=(req,res)=>{
     const msg = {
         to: req.body.email, // Change to your recipient
-        from: 'sinanergezer@gmail.com', // Change to your verified sender
-        subject: 'Reset youtr password',
+        from: 'atalaykorkut@hotmail.com', // Change to your verified sender
+        subject: 'Reset your password',
         text: 'Reset your password'
         
         
@@ -14,6 +16,7 @@ module.exports=(req,res)=>{
         .send(msg)
         .then(()=>{
             console.log('email sent')
+            console.log(process.env.SENDGRID_API_KEY);
         })
         .catch((err)=>{
             console.log(err)
