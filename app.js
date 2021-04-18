@@ -21,7 +21,7 @@ const adminRouteController=require('./routes/adminRoute.js');
 const registerRouteController=require('./routes/registerRoute');
 const homeRouteController=require('./routes/homeRoute');
 const resetPasswordRouteController=require('./routes/resetPasswordRoute');
-
+const newPasswordRouteController=require('./routes/newPasswordRoute');
 const server = http.createServer(app);
 
 app.set("view engine", "pug");
@@ -49,6 +49,7 @@ app.use('/admin', adminRouteController);
 app.use('/register', registerRouteController);
 app.use('/home', homeRouteController);
 app.use('/resetPassword',resetPasswordRouteController)
+app.use('/newPassword',newPasswordRouteController)
 
 app.use((req,res,next)=>{
  res.status(404).sendFile(path.join(__dirname,"views","404.html"));
