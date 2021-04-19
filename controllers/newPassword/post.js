@@ -11,9 +11,7 @@ module.exports=(req,res,next)=>{
         },
         _id:userId
     }).then(user =>{
-        console.log(newPassword);
-        console.log(PasswordToken);
-        console.log(userId);
+
         _user=user;
         return bcrypt.hash(newPassword,10)
         }).then(hashedPassword=>{

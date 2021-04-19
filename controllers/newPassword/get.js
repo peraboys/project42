@@ -2,24 +2,23 @@ const User = require("../../models/User")
 
 module.exports=(req,res)=>
 {
-
+var _usr;
     const token =req.params.token;
 
-    User.findOne({
+     User.findOne({
         resetToken:token,resetTokenExpiration:{
             $gt: Date.now()
         }
     }).then(user =>{
-        
-        res.render('newPassword',{
+        _usr=user;
+        const userId=_usr._id;
+       return  res.render('newPassword',{
 
             message: 'New Password',
-            userId: user._id.toString(),
+            userId: userId,
             passwordToken:token
         });
-        console.log(userId);
-        console.log(passwordToken);
-        //undefined
+       // console.log(_usr._id);
     }).catch(err=>{
         console.log(err);
     });
