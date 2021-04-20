@@ -6,6 +6,7 @@ const { validate } = require('../../models/User');
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+
 module.exports = (req, res) => {
     User.findOne({name: req.body.name})
     .then(usr=>

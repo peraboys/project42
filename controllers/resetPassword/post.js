@@ -35,7 +35,7 @@ module.exports=(req,res)=>{
         html: `  
         <p> Follow this link to reset your password </p>
         <p>
-      <a href="http://localhost:3000/resetPassword/${token}"
+      <a href="http://localhost:3000/newPassword/${token}"
       >reset password </a>
       </p>
 

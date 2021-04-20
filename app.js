@@ -58,6 +58,7 @@ app.use((req,res,next)=>{
 mongoose.connect(connectionString,{ useFindAndModify: false })
 .then(()=>{
 console.log("connected to mongodb");
+console.log(process.env.SENDGRID_API_KEY);
 app.listen(3000);
 })
 .catch(err=>{

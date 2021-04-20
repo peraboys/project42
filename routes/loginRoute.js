@@ -9,5 +9,5 @@ router.get(
   router.post(
     '/',
      loginPostController
-  );
+  ); 
   module.exports = router;

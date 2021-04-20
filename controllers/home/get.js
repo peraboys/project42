@@ -6,4 +6,4 @@ module.exports = (req, res) => {
       user:req.session.user
       })
     
-    }
+    }  
