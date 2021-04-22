@@ -31,7 +31,7 @@ module.exports=(req,res)=>{
         to: req.body.email, // Change to your recipient
         from: 'atalaykorkut@hotmail.com', // Change to your verified sender
         subject: 'Reset your password',
-        text: 'Reset your password',
+        
         html: `  
         <p> Follow this link to reset your password </p>
         <p>
@@ -39,7 +39,7 @@ module.exports=(req,res)=>{
       >reset password </a>
       </p>
 
-        `
+        `,
 
 
       };

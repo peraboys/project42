@@ -1,29 +1,30 @@
-html
-    head
-        h1 UserList
-    body
-        if action=='delete'
-            h1 user deleted
-        if action =='edit'
-            h1 user updated 
-        if users.length>0
-            table
+extends layouts/main-layout.pug     
+block  content
 
-                tr
-                    td name 
-                    td password 
-                    td gender
-                    td isAdmin
-                each user in users 
-                    tr 
-                        td #{user.name}
-                        td #{user.password}
-                        td #{user.gender}
-                        td #{user.isAdmin}
-                        td 
-                            a(href=`/admin/edituser/${user._id}`) edit
-                        td  
-                            a(href=`/admin/deleteuser/${user._id}`) delete
+    h1 UserList
+    
+    if action=='delete'
+        h1 user deleted
+    if action =='edit'
+        h1 user updated 
+    if users.length>0
+        table(class = 'table table-hover')
 
-        else 
-            h1 No users available 
+            tr
+                td name 
+                td password 
+                td gender
+                td isAdmin
+            each user in users 
+                tr 
+                    td #{user.name}
+                    td #{user.password}
+                    td #{user.gender}
+                    td #{user.isAdmin}
+                    td 
+                        a(href=`/admin/edituser/${user._id}`) edit
+                    td  
+                        a(href=`/admin/deleteuser/${user._id}`) delete
+
+    else 
+        h1 No users available 
